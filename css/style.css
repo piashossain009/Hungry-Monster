@@ -1,7 +1,15 @@
+*{
+    margin: 0 auto;
+    outline: 0;
+    padding: 0;
+}
+.meal-item-list{
+    text-align: center;
+}
 #meal-list{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 #meal-list img{
     height: 300px;

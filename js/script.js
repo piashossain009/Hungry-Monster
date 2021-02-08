@@ -1,15 +1,23 @@
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', getMealItem);
+// const mealsDetailsDiv = document.getElementById('meals-details');
+//             mealsDetailsDiv.style.display='none';
 
 
 function getMealItem() {
+    const mealsDetailsDiv = document.getElementById('meals-details');
+            mealsDetailsDiv.style.display='none';
     let inputBox = document.getElementById('input-box').value;
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputBox} `;
+    if ( inputBox == ''){
+        alert('Please type meals Name.');
+    }
+    else{
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputBox} `;
 
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             // const mealsItem = data.meals;
             const mealListDiv = document.getElementById('meal-list');
             mealListDiv.innerHTML = '';
@@ -34,7 +42,7 @@ function getMealItem() {
             } else {
                 // console.log('not found');
                 const notFoundMeal = `
-        <h4>Your search item meals not found try again. </h4>
+        <h4> Your search item meals not found try again. </h4>
         `
                 mealListDiv.innerHTML = notFoundMeal;
 
@@ -42,20 +50,25 @@ function getMealItem() {
             //console.log(mealsItem);
 
         })
+
+    }
+    
+        // .catch(error => window.alert('test'))
 }
 
 
 const displayDetails = (mname) => {
 
-    console.log(mname);
-    const searchButtonInside = document.getElementById('search-button');
-    searchButtonInside.addEventListener('click', getMealItem);
+    // console.log(mname);
+    const mealsDetailsDiv = document.getElementById('meals-details');
+            mealsDetailsDiv.innerHTML='';
+            mealsDetailsDiv.style.display='block';
+   
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mname}`)
         .then(res => res.json())
         .then(data => {
 
-            const mealsDetailsDiv = document.getElementById('meals-details');
-            // mealsDetailsDiv.innerHTML='';
+            
             data.meals.forEach(mealsItemDetails => {
 
                 const mealsItemListDetails = `
@@ -68,6 +81,9 @@ const displayDetails = (mname) => {
             <li>${mealsItemDetails.strMeasure4} ${mealsItemDetails.strIngredient4}</li>
             <li>${mealsItemDetails.strMeasure5} ${mealsItemDetails.strIngredient5}</li>
             <li>${mealsItemDetails.strMeasure6} ${mealsItemDetails.strIngredient6}</li>
+            <li>${mealsItemDetails.strMeasure7} ${mealsItemDetails.strIngredient7}</li>
+            <li>${mealsItemDetails.strMeasure8} ${mealsItemDetails.strIngredient8}</li>
+            <li>${mealsItemDetails.strMeasure9} ${mealsItemDetails.strIngredient9}</li>
             `
 
                 mealsDetailsDiv.innerHTML = mealsItemListDetails;
