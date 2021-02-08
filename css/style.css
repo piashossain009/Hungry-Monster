@@ -13,3 +13,15 @@
     font-style: italic;
     text-align: center;
 }
+
+#meals-details img{
+    height: 270px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+#meals-details h2{
+    text-align: center;
+    padding: 10px 5px;
+    font-weight: 600;
+}
