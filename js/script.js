@@ -1,6 +1,7 @@
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', getMealItem);
 
+
 function getMealItem() {
     let inputBox = document.getElementById('input-box').value;
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${inputBox} `;
@@ -8,9 +9,10 @@ function getMealItem() {
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            // console.log(data);
+            console.log(data);
             // const mealsItem = data.meals;
             const mealListDiv = document.getElementById('meal-list');
+            mealListDiv.innerHTML = '';
             if (data.meals) {
 
                 // for (let i = 0; i < data.meals.length; i++) {
@@ -41,27 +43,36 @@ function getMealItem() {
 
         })
 }
+
+
 const displayDetails = (mname) => {
+
     console.log(mname);
+    const searchButtonInside = document.getElementById('search-button');
+    searchButtonInside.addEventListener('click', getMealItem);
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mname}`)
         .then(res => res.json())
         .then(data => {
+
             const mealsDetailsDiv = document.getElementById('meals-details');
+            // mealsDetailsDiv.innerHTML='';
             data.meals.forEach(mealsItemDetails => {
 
                 const mealsItemListDetails = `
             <img src="${mealsItemDetails.strMealThumb}"> <br>
             <h2>${mealsItemDetails.strMeal}</h2>
             <h4> Ingredients </h4>
-            <li>${mealsItemDetails.strIngredient1}</li>
-            <li>${mealsItemDetails.strIngredient2}</li>
-            <li>${mealsItemDetails.strIngredient3}</li>
-            <li>${mealsItemDetails.strIngredient4}</li>
-            <li>${mealsItemDetails.strIngredient5}</li>
-            <li>${mealsItemDetails.strIngredient6}</li>
+            <li>${mealsItemDetails.strMeasure1} ${mealsItemDetails.strIngredient1}</li>
+            <li>${mealsItemDetails.strMeasure2} ${mealsItemDetails.strIngredient2}</li>
+            <li>${mealsItemDetails.strMeasure3} ${mealsItemDetails.strIngredient3}</li>
+            <li>${mealsItemDetails.strMeasure4} ${mealsItemDetails.strIngredient4}</li>
+            <li>${mealsItemDetails.strMeasure5} ${mealsItemDetails.strIngredient5}</li>
+            <li>${mealsItemDetails.strMeasure6} ${mealsItemDetails.strIngredient6}</li>
             `
 
                 mealsDetailsDiv.innerHTML = mealsItemListDetails;
+
+
 
 
             });
